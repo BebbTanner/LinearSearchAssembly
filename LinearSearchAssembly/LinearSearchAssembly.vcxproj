@@ -136,6 +136,7 @@
     <MASM Include="Main.asm">
       <FileType>Document</FileType>
       <IncludePaths Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Irvine</IncludePaths>
+      <IncludePaths Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Irvine</IncludePaths>
     </MASM>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
