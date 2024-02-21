@@ -20,23 +20,27 @@ i SDWORD 0
 
 LinearSearch PROC				;This is the linearsearch function
 	mov i,0						;Storing 0 into the i variable
-	mov eax, edx				;eax is the pointer for the myArray
-
-LinearSearch ENDP
 
 again:
 	cmp	i, ecx					;Compares the value of i to what is stored in the ecx register.
 	jge cantfind				;If the value is greater than or equal to it jumps to the cantfind tag.
+	cmp DWORD PTR [eax], ebx	;This is going to compare the value pointed to in the array to the value in the ebx register.
+	jne notfound				;If it is not equal to the compared value it will jump to the notfound tag.
+	mov eax, i					;Move the value of i into the eax register.
+	jmp done					;Jump to the done tag.
 
-
-	inc i						;Increments the value stored in i.
-	jmp again					;Jumps back to the again tag, Keeps running until the conditions are met.
+notfound:
+	inc i						;Increment the value of i.
+	add edx, 4					;Add 4 to the edx register to get to the next value in the array.
+	jmp again					;Jump back to the again tag and continue running until the conditions are met.
 
 cantfind:
 	mov eax, -1					;Moving the value of -1 into the eax registers. This basically tells me that the value could not be found
 
 done:
 	ret							;Just a return statement, unsure as to what is does right now.
+
+LinearSearch ENDP
 
 main PROC
 	mov edx, OFFSET myArray		;Move the OFFSET myArray into the edx register.
@@ -53,8 +57,8 @@ main PROC
 	call WriteInt				;This calls the WriteInt function included in the irvine library.
 	call Crlf					;This calls the Crlf function which will input a blank line.
 
-	call WaitMsg
-	exit
+	call WaitMsg				;Calls the WaitMsg function in the Irvine library.
+	exit						;Exits the program.
 
 main ENDP
 end main
