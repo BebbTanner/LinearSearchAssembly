@@ -3,7 +3,6 @@
 
 .386
 include Irvine32.inc
-.model flat, stdcall
 .stack 4096
 ExitProcess proto dwExitCode:dword
 
@@ -19,7 +18,7 @@ i SDWORD 0
 ;EAX - return value
 
 
-LinearSeach PROC				;This is the linearsearch function
+LinearSearch PROC				;This is the linearsearch function
 	mov i,0						;Storing 0 into the i variable
 	mov eax, edx				;eax is the pointer for the myArray
 
@@ -37,7 +36,7 @@ cantfind:
 	mov eax, -1					;Moving the value of -1 into the eax registers. This basically tells me that the value could not be found
 
 done:
-	ret							;Just a return statement, unsure as to what I am doing with this.
+	ret							;Just a return statement, unsure as to what is does right now.
 
 main PROC
 	mov edx, OFFSET myArray		;Move the OFFSET myArray into the edx register.
