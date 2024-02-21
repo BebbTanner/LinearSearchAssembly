@@ -19,20 +19,22 @@ myArray SWORD 2, 9, 3, 4, 8, 1, 5
 
 
 LinearSeach PROC			;This is the linearsearch function
+	mov eax,0				;Storing 0 into the eax register for testing purposes
+	ret						;Return the values stored in eax?
 
-
-LinearSearch endp
+LinearSearch ENDP
 
 
 main PROC
 	mov edx, myArray
 	mov ecx, 7
-	LinearSearch
-
+	call LinearSearch
+	call WriteInt
+	call Crlf
 
 
 	call WaitMsg
 	exit
 
-main endp
+main ENDP
 end main
