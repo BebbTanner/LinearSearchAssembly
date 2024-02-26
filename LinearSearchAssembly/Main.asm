@@ -8,7 +8,7 @@ ExitProcess proto dwExitCode:dword
 
 .data
 
-myArray SWORD 2, 9, 3, 4, 8, 1, 5
+myArray SDWORD 2, 9, 3, 4, 8, 1, 5
 i SDWORD 0
 
 .code
@@ -19,12 +19,13 @@ i SDWORD 0
 
 
 LinearSearch PROC				;This is the linearsearch function
+	push edx					;Pushes edx on to the stack.
 	mov i,0						;Storing 0 into the i variable
 
 again:
 	cmp	i, ecx					;Compares the value of i to what is stored in the ecx register.
 	jge cantfind				;If the value is greater than or equal to it jumps to the cantfind tag.
-	cmp [edx], ebx	;This is going to compare the value pointed to in the array to the value in the ebx register.
+	cmp DWORD PTR [edx], ebx	;This is going to compare the value pointed to in the array to the value in the ebx register.
 	jne notfound				;If it is not equal to the compared value it will jump to the notfound tag.
 	mov eax, i					;Move the value of i into the eax register.
 	jmp done					;Jump to the done tag.
@@ -38,6 +39,7 @@ cantfind:
 	mov eax, -1					;Moving the value of -1 into the eax registers. This basically tells me that the value could not be found
 
 done:
+	pop edx						;Removes edx from the stack.
 	ret							;Just a return statement, unsure as to what is does right now.
 
 LinearSearch ENDP
@@ -45,14 +47,14 @@ LinearSearch ENDP
 main PROC
 	mov edx, OFFSET myArray		;Move the OFFSET myArray into the edx register.
 	mov ecx, 7					;Move the "size" of the array into ecx.
-	mov ebx, 1					;Move the value I am searching for into ebx.
+	mov ebx, 8					;Move the value I am searching for into ebx.
 	call LinearSearch			;This calls the LinearSeach function.
 	call WriteInt				;This calls the WriteInt function included in the irvine library.
 	call Crlf					;This calls the Crlf function which will input a blank line.
 
-	mov edx, OFFSET myArray		;Move the OFFSET myArray into the edx register.
+	mov edx, OFFSET myArray	;Move the OFFSET myArray into the edx register.
 	mov ecx, 7					;Move the "size" of the array into ecx.
-	mov ebx, 11					;Move the value I am searching for into ebx.
+	mov ebx, 1					;Move the value I am searching for into ebx.
 	call LinearSearch			;This calls the LinearSeach function.
 	call WriteInt				;This calls the WriteInt function included in the irvine library.
 	call Crlf					;This calls the Crlf function which will input a blank line.
