@@ -24,7 +24,7 @@ LinearSearch PROC				;This is the linearsearch function
 again:
 	cmp	i, ecx					;Compares the value of i to what is stored in the ecx register.
 	jge cantfind				;If the value is greater than or equal to it jumps to the cantfind tag.
-	cmp DWORD PTR [eax], ebx	;This is going to compare the value pointed to in the array to the value in the ebx register.
+	cmp [edx], ebx	;This is going to compare the value pointed to in the array to the value in the ebx register.
 	jne notfound				;If it is not equal to the compared value it will jump to the notfound tag.
 	mov eax, i					;Move the value of i into the eax register.
 	jmp done					;Jump to the done tag.
